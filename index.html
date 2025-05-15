@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Premonio</title>
+    <meta name="description" content="Premonio - Modern Business Solutions" />
+    
+    <!-- Tailwind CSS from CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configure Tailwind -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#8B5CF6',
+              'primary-light': '#9b87f5',
+              'primary-dark': '#7c4ff5',
+            },
+            backgroundImage: {
+              'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+            }
+          }
+        }
+      }
+    </script>
+    
+    <!-- Custom styles -->
+    <style>
+      /* Prevent horizontal scroll */
+      html, body {
+        overflow-x: hidden;
+        width: 100%;
+        position: relative;
+        scroll-behavior: smooth;
+      }
+
+      /* Ensure all sections respect viewport width */
+      section, div {
+        max-width: 100vw;
+      }
+
+      /* Fix for absolute positioned elements */
+      .absolute {
+        max-width: 100vw;
+      }
+
+      /* Ensure images don't cause overflow */
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* Container class for consistent padding */
+      .container-custom {
+        width: 100%;
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .gradient-card-1 {
+        background: linear-gradient(135deg, #f97316 0%, #fec6a1 100%);
+      }
+      
+      .gradient-card-2 {
+        background: linear-gradient(135deg, #ff719A 0%, #FFA99F 100%);
+      }
+      
+      .gradient-card-3 {
+        background: linear-gradient(135deg, #33C3F0 0%, #D3E4FD 100%);
+      }
+      
+      @keyframes fade-in {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      
+      @keyframes slide-up {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+        100% { transform: translateY(0px); }
+      }
+      
+      .animate-fade-in {
+        animation: fade-in 1s ease-out;
+      }
+      
+      .animate-slide-up {
+        animation: slide-up 0.8s ease-out forwards;
+      }
+      
+      .animate-float {
+        animation: float 6s ease-in-out infinite;
+      }
+      
+      .delay-100 {
+        animation-delay: 100ms;
+      }
+      
+      .delay-200 {
+        animation-delay: 200ms;
+      }
+
+      /* Scroll Animations */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .slide-in-left {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+
+      .slide-in-left.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .slide-in-right {
+        opacity: 0;
+        transform: translateX(50px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+
+      .slide-in-right.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .scale-in {
+        opacity: 0;
+        transform: scale(0.9);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+
+      .scale-in.visible {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      /* Smooth scroll behavior */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Navbar scroll effect */
+      .navbar-scroll {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Hover effects for cards */
+      .hover-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .hover-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Gradient text effect */
+      .gradient-text {
+        background: linear-gradient(45deg, #8B5CF6, #7c4ff5);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* Page Load Animation */
+      @keyframes pageLoad {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Section Reveal Animation */
+      @keyframes sectionReveal {
+        0% {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Enhanced Hover Effects */
+      .hover-scale {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .hover-scale:hover {
+        transform: scale(1.02);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Page Load Animation */
+      .page-load {
+        animation: pageLoad 1s ease-out forwards;
+      }
+
+      /* Section Reveal Animation */
+      .section-reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+        will-change: transform, opacity;
+      }
+
+      .section-reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Enhanced Card Animations */
+      .card-hover {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        will-change: transform;
+      }
+
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Text Gradient Animation */
+      @keyframes gradientFlow {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .animated-gradient-text {
+        background: linear-gradient(45deg, #8B5CF6, #7c4ff5, #9b87f5);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradientFlow 5s ease infinite;
+      }
+
+      /* Enhanced Button Hover */
+      .button-hover {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        will-change: transform;
+      }
+
+      .button-hover:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 3px 10px rgba(139, 92, 246, 0.2);
+      }
+
+      /* Loading Animation */
+      .loading-animation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 0.3s ease-out;
+      }
+
+      .loading-animation.fade-out {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .loading-spinner {
+        width: 40px;
+        height: 40px;
+        border: 2px solid #f3f3f3;
+        border-top: 2px solid #8B5CF6;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+  </head>
+  <body class="bg-white">
+    <!-- Loading Animation -->
+    <div class="loading-animation">
+      <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex items-center justify-between py-4 px-4 md:px-12 w-full bg-white shadow-sm sticky top-0 z-50">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <img src="public/Kagziinfotech.svg" alt="Kagziinfotech" class="h-6 md:h-8 w-auto">
+      </div>
+      
+      <!-- Mobile menu button -->
+      <button id="mobile-menu-button" class="md:hidden p-2 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+      
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-8">
+        <!-- Navigation Links -->
+        <div class="flex items-center space-x-8 mr-8">
+          <a href="#home" class="text-sm font-medium text-gray-700 hover:text-[#8B5CF6] transition-colors">Home</a>
+          <a href="#products" class="text-sm font-medium text-gray-700 hover:text-[#8B5CF6] transition-colors">Products</a>
+          <a href="#about" class="text-sm font-medium text-gray-700 hover:text-[#8B5CF6] transition-colors">About Us</a>
+          <a href="#contact" class="text-sm font-medium text-gray-700 hover:text-[#8B5CF6] transition-colors">Contact</a>
+        </div>
+        
+        <!-- Login and Sign Up -->
+        <div class="flex items-center space-x-4 border-l pl-8 border-gray-200">
+          <a href="#" class="text-sm font-medium text-gray-700 hover:text-[#8B5CF6] transition-colors">Log in</a>
+          <button class="bg-[#8B5CF6] hover:bg-[#7c4ff5] text-white px-4 py-2 rounded-lg transition-colors shadow-sm hover:shadow">Sign Up</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Navigation Menu -->
+    <div id="mobile-menu" class="hidden md:hidden fixed top-16 left-0 right-0 bg-white shadow-lg p-4 z-50 w-full">
+      <div class="flex flex-col space-y-4">
+        <a href="#home" class="text-sm text-gray-700 hover:text-gray-900">Home</a>
+        <a href="#products" class="text-sm text-gray-700 hover:text-gray-900">Products</a>
+        <a href="#about" class="text-sm text-gray-700 hover:text-gray-900">About Us</a>
+        <a href="#contact" class="text-sm text-gray-700 hover:text-gray-900">Contact</a>
+        <div class="border-t border-gray-200 my-2"></div>
+        <a href="#" class="text-sm text-gray-700 hover:text-gray-900">Log in</a>
+        <button class="bg-[#8B5CF6] hover:bg-[#7c4ff5] text-white px-4 py-2 rounded w-full">Sign Up</button>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div id="home" class="w-full py-20 md:py-32 px-4 md:px-12 relative overflow-hidden bg-gradient-to-b from-white to-gray-50">
+      <div class="container-custom">
+        <!-- Purple badge -->
+        <div class="inline-block bg-[#8B5CF6]/10 text-[#8B5CF6] font-medium rounded-full px-4 py-1.5 text-sm mb-6 animate-fade-in">
+          NEW AND IMPROVED
+        </div>
+        
+        <!-- Main heading -->
+        <h1 class="text-4xl md:text-6xl font-bold leading-tight max-w-3xl mb-8 animate-slide-up">
+          Boost your project's speed and efficiency with our <span class="text-[#8B5CF6]">innovative solutions</span>.
+        </h1>
+        
+        <!-- Subheading -->
+        <p class="text-lg text-gray-600 max-w-2xl mb-10 animate-slide-up delay-100">
+          Take advantage of our cutting-edge technology to increase your productivity and achieve better results. Join thousands of satisfied customers who trust our platform.
+        </p>
+        
+        <!-- CTA buttons -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-16 animate-slide-up delay-200">
+          <button class="bg-[#8B5CF6] hover:bg-[#7c4ff5] text-white px-8 py-4 rounded-lg text-lg font-medium shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5">
+            Get Started
+          </button>
+          <button class="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-lg text-lg font-medium hover:border-[#8B5CF6] hover:text-[#8B5CF6] transition-all">
+            Learn More →
+          </button>
+        </div>
+      </div>
+      
+      <!-- Abstract shape image -->
+      <div class="absolute top-0 right-0 w-1/2 h-full bg-contain bg-no-repeat bg-right z-0 opacity-90 animate-float">
+        <div class="w-full h-full bg-gradient-radial from-[#9b87f5]/40 via-[#8B5CF6]/30 to-transparent rounded-full blur-3xl transform translate-x-1/4 -translate-y-1/4"></div>
+      </div>
+    </div>
+
+    <!-- Vision Section -->
+    <div class="w-full py-20 px-4 md:px-12 bg-gray-50">
+      <div class="text-center mb-16 fade-in">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">
+          Together, we are creating a <span class="gradient-text">Bright Future</span>.
+        </h2>
+        <p class="text-gray-600 uppercase tracking-wider font-medium">JOIN US</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+        <!-- Feature 1 -->
+        <div class="bg-white p-8 rounded-xl shadow-sm hover-card scale-in">
+          <div class="w-12 h-12 bg-[#8B5CF6]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#8B5CF6] transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#8B5CF6] group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-xl mb-3">Powerful Performance</h3>
+          <p class="text-gray-600 mb-6">Experience lightning-fast performance with our optimized algorithms and efficient code.</p>
+          <button class="border border-[#8B5CF6] text-[#8B5CF6] px-4 py-2 rounded-lg hover:bg-[#8B5CF6] hover:text-white transition-colors">
+            Learn More
+          </button>
+        </div>
+        
+        <!-- Feature 2 -->
+        <div class="bg-white p-8 rounded-xl shadow-sm hover-card scale-in">
+          <div class="w-12 h-12 bg-[#8B5CF6]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#8B5CF6] transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#8B5CF6] group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-xl mb-3">Intuitive Design</h3>
+          <p class="text-gray-600 mb-6">Our user-friendly interface makes it easy for anyone to use our platform effectively.</p>
+          <button class="border border-[#8B5CF6] text-[#8B5CF6] px-4 py-2 rounded-lg hover:bg-[#8B5CF6] hover:text-white transition-colors">
+            Learn More
+          </button>
+        </div>
+        
+        <!-- Feature 3 -->
+        <div class="bg-white p-8 rounded-xl shadow-sm hover-card scale-in">
+          <div class="w-12 h-12 bg-[#8B5CF6]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#8B5CF6] transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#8B5CF6] group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-xl mb-3">Reliable Support</h3>
+          <p class="text-gray-600 mb-6">Our dedicated team is always ready to help you resolve any issues that may arise.</p>
+          <button class="border border-[#8B5CF6] text-[#8B5CF6] px-4 py-2 rounded-lg hover:bg-[#8B5CF6] hover:text-white transition-colors">
+            Learn More
+          </button>
+        </div>
+        
+        <!-- Feature 4 -->
+        <div class="bg-white p-8 rounded-xl shadow-sm hover-card scale-in">
+          <div class="w-12 h-12 bg-[#8B5CF6]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#8B5CF6] transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#8B5CF6] group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-xl mb-3">Cutting-edge Technology</h3>
+          <p class="text-gray-600 mb-6">We use the latest technologies to ensure your experience is smooth and efficient.</p>
+          <button class="border border-[#8B5CF6] text-[#8B5CF6] px-4 py-2 rounded-lg hover:bg-[#8B5CF6] hover:text-white transition-colors">
+            Learn More
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Features -->
+    
+
+    <!-- About Section -->
+    <div id="about" class="w-full py-16 px-6 md:px-12">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+        <!-- Image column -->
+        <div class="relative">
+          <img
+            src="public/Team.png"
+            alt="Team collaborating"
+            class="rounded-lg shadow-lg w-full h-auto object-cover"
+          />
+          <div class="absolute top-6 left-6 bg-[#8B5CF6] text-white text-sm px-4 py-1 rounded-full">
+            OUR STORY
+          </div>
+        </div>
+        
+        <!-- Text column -->
+        <div class="flex flex-col justify-center">
+          <h2 class="text-3xl font-bold mb-4">
+            Explore our story, values, and the mission that inspires <span class="text-[#8B5CF6]">everything we do</span>
+          </h2>
+          <p class="text-gray-600 mb-8">
+            Founded with a vision to revolutionize how businesses operate in the digital era, 
+            we're committed to creating solutions that drive growth and efficiency. 
+            Our team combines expertise in technology, design, and business strategy 
+            to deliver products that make a real difference.
+          </p>
+          <button class="bg-[#8B5CF6] hover:bg-[#7c4ff5] text-white px-4 py-2 rounded self-start">
+            Learn More
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Showcase -->
+    <div class="w-full py-16 px-6 md:px-12 bg-gray-50">
+      <h2 class="text-3xl font-bold text-center mb-12">Revolutionizing Your World with Our Products</h2>
+      
+      <div class="flex flex-col md:flex-row justify-center items-center gap-4 mb-12">
+        <button id="popular-items" class="bg-[#8B5CF6] hover:bg-[#7c4ff5] text-white px-6 py-2 rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95">
+          Popular Items
+        </button>
+        <button id="feature-2" class="border border-gray-300 text-gray-700 px-6 py-2 rounded-full hover:border-[#8B5CF6] hover:text-[#8B5CF6] transition-all duration-300 transform hover:scale-105 active:scale-95">
+          Feature #2
+        </button>
+        <button id="feature-3" class="border border-gray-300 text-gray-700 px-6 py-2 rounded-full hover:border-[#8B5CF6] hover:text-[#8B5CF6] transition-all duration-300 transform hover:scale-105 active:scale-95">
+          Feature #3
+        </button>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <!-- Product Card 1 -->
+        <div id="popular-card" class="gradient-card-1 rounded-lg aspect-square transition-all duration-300 transform hover:scale-105 cursor-pointer"></div>
+        
+        <!-- Product Card 2 -->
+        <div id="feature-2-card" class="gradient-card-2 rounded-lg aspect-square transition-all duration-300 transform hover:scale-105 cursor-pointer"></div>
+        
+        <!-- Product Card 3 -->
+        <div id="feature-3-card" class="gradient-card-3 rounded-lg aspect-square transition-all duration-300 transform hover:scale-105 cursor-pointer"></div>
+      </div>
+    </div>
+
+    <!-- Team Section -->
+    <div id="about" class="w-full py-16 px-6 md:px-12">
+      <h2 class="text-3xl font-bold text-center mb-12">
+        Meet the Amazing Team<br />
+        Behind Our Success
+      </h2>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+        <!-- Team Member 1 -->
+        <div class="text-center">
+          <img
+            src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+            alt="James Wagner"
+            class="w-full aspect-square object-cover rounded-xl mb-4"
+          />
+          <h3 class="font-semibold text-lg">James Wagner</h3>
+          <p class="text-gray-600 text-sm">CEO & Founder</p>
+        </div>
+
+        <!-- Team Member 2 -->
+        <div class="text-center">
+          <img
+            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+            alt="John Hopkins"
+            class="w-full aspect-square object-cover rounded-xl mb-4"
+          />
+          <h3 class="font-semibold text-lg">John Hopkins</h3>
+          <p class="text-gray-600 text-sm">Lead Designer</p>
+        </div>
+
+        <!-- Team Member 3 -->
+        <div class="text-center">
+          <img
+            src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80"
+            alt="Lisa Raymond"
+            class="w-full aspect-square object-cover rounded-xl mb-4"
+          />
+          <h3 class="font-semibold text-lg">Lisa Raymond</h3>
+          <p class="text-gray-600 text-sm">Developer</p>
+        </div>
+
+        <!-- Team Member 4 -->
+        <div class="text-center">
+          <img
+            src="https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+            alt="Alex Mitchell"
+            class="w-full aspect-square object-cover rounded-xl mb-4"
+          />
+          <h3 class="font-semibold text-lg">Alex Mitchell</h3>
+          <p class="text-gray-600 text-sm">Marketing</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="w-full py-16 px-6 md:px-12">
+      <h2 class="text-3xl font-bold text-center mb-12">
+        Words from Our Satisfied Customers
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <!-- Testimonial 1 -->
+        <div class="p-6 rounded-xl bg-gray-100">
+          <div class="flex items-start mb-4">
+            <img
+              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=100&q=80"
+              alt="Sarah Johnson"
+              class="w-10 h-10 rounded-full mr-3"
+            />
+            <div>
+              <h4 class="font-medium">Sarah Johnson</h4>
+              <p class="text-sm text-gray-600">
+                Tech Innovations
+              </p>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-4">
+            This platform has completely transformed how our team works. We've seen a 40% increase in productivity since implementing it.
+          </p>
+          <div class="flex justify-end">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path></svg>
+          </div>
+        </div>
+        
+        <!-- Testimonial 2 -->
+        <div class="p-6 rounded-xl bg-[#8B5CF6] text-white">
+          <div class="flex items-start mb-4">
+            <img
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=100&q=80"
+              alt="Michael Chen"
+              class="w-10 h-10 rounded-full mr-3"
+            />
+            <div>
+              <h4 class="font-medium">Michael Chen</h4>
+              <p class="text-sm text-white/80">
+                Growth Solutions
+              </p>
+            </div>
+          </div>
+          <p class="text-white/90 mb-4">
+            The customer support team is exceptional. They helped us customize the solution perfectly for our unique business needs.
+          </p>
+          <div class="flex justify-end">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/50"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path></svg>
+          </div>
+        </div>
+        
+        <!-- Testimonial 3 -->
+        <div class="p-6 rounded-xl bg-gray-100">
+          <div class="flex items-start mb-4">
+            <img
+              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=100&q=80"
+              alt="Emma Rodriguez"
+              class="w-10 h-10 rounded-full mr-3"
+            />
+            <div>
+              <h4 class="font-medium">Emma Rodriguez</h4>
+              <p class="text-sm text-gray-600">
+                Digital Spark
+              </p>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-4">
+            We've tried many similar products, but none have delivered the consistent results and reliability we get with this platform.
+          </p>
+          <div class="flex justify-end">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div id="contact" class="w-full py-16 px-6 md:px-12 bg-gray-50">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+        <!-- Contact form -->
+        <div>
+          <h2 class="text-3xl font-bold mb-6">
+            Have Questions?<br />
+            <span class="text-[#8B5CF6]">Contact Us</span>
+          </h2>
+          
+          <form class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
+                  Name
+                </label>
+                <input 
+                  id="name" 
+                  placeholder="Your name" 
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:border-transparent"
+                />
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+                  Email
+                </label>
+                <input 
+                  id="email" 
+                  type="email" 
+                  placeholder="Your email" 
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:border-transparent"
+                />
+              </div>
+            </div>
+            
+            <div>
+              <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">
+                Subject
+              </label>
+              <input 
+                id="subject" 
+                placeholder="How can we help?" 
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:border-transparent"
+              />
+            </div>
+            
+            <div>
+              <label for="message" class="block text-sm font-medium text-gray-700 mb-1">
+                Message
+              </label>
+              <textarea 
+                id="message" 
+                placeholder="Your message" 
+                rows="5" 
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:border-transparent"
+              ></textarea>
+            </div>
+            
+            <button type="submit" class="bg-[#8B5CF6] hover:bg-[#7c4ff5] text-white px-4 py-2 rounded">
+              Send Message
+            </button>
+          </form>
+        </div>
+        
+        <!-- Image/Graphic -->
+        <div class="hidden md:block relative">
+          <div class="absolute inset-0 bg-[#8B5CF6] rounded-lg opacity-80"></div>
+          <div class="absolute inset-0 bg-gradient-radial from-[#8B5CF6] to-purple-900 opacity-80 rounded-lg"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-full py-16 px-6 md:px-12 bg-[#8B5CF6] text-white">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-white/20">
+          <!-- Company info -->
+          <div>
+            <h3 class="font-bold text-xl mb-4">Premonio</h3>
+            <p class="text-white/80 text-sm mb-4">
+              Building the future of digital experiences with innovative solutions and cutting-edge technology.
+            </p>
+            <div class="flex space-x-4">
+              <a href="#" class="text-white/80 hover:text-white">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                </svg>
+              </a>
+              <a href="#" class="text-white/80 hover:text-white">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path>
+                </svg>
+              </a>
+              <a href="#" class="text-white/80 hover:text-white">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"></path>
+                </svg>
+              </a>
+              <a href="#" class="text-white/80 hover:text-white">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          
+          <!-- Quick links -->
+          <div>
+            <h4 class="font-semibold mb-4">Our Products</h4>
+            <ul class="space-y-2">
+              <li><a href="#" class="text-white/80 hover:text-white text-sm">Features</a></li>
+              <li><a href="#" class="text-white/80 hover:text-white text-sm">Solutions</a></li>
+              <li><a href="#" class="text-white/80 hover:text-white text-sm">Pricing</a></li>
+              <li><a href="#" class="text-white/80 hover:text-white text-sm">Tutorials</a></li>
+            </ul>
+          </div>
+          
+          <!-- Company -->
+          <div>
+            <h4 class="font-semibold mb-4">Company</h4>
+            <ul class="space-y-2">
+              <li><a href="#" class="text-white/80 hover:text-white text-sm">About Us</a></li>
+              <li><a href="#" class="text-white/80 hover:text-white text-sm">Careers</a></li>
+              <li><a href="#" class="text-white/80 hover:text-white text-sm">Press</a></li>
+              <li><a href="#" class="text-white/80 hover:text-white text-sm">Contact</a></li>
+            </ul>
+          </div>
+          
+          <!-- Resources -->
+          <div>
+            <h4 class="font-semibold mb-4">Support</h4>
+            <ul class="space-y-2">
+              <li><a href="#" class="text-white/80 hover:text-white text-sm">Help Center</a></li>
+              <li><a href="#" class="text-white/80 hover:text-white text-sm">Documentation</a></li>
+              <li><a href="#" class="text-white/80 hover:text-white text-sm">Security</a></li>
+              <li><a href="#" class="text-white/80 hover:text-white text-sm">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Copyright -->
+        <div class="pt-8 text-center text-white/70 text-sm">
+          <p>© 2025 Premonio. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+      // Mobile menu toggle
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      
+      mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!mobileMenuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
+          mobileMenu.classList.add('hidden');
+        }
+      });
+
+      // Form handling
+      const contactForm = document.querySelector('form');
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(contactForm);
+        const data = Object.fromEntries(formData);
+        
+        // Basic form validation
+        if (!data.name || !data.email || !data.message) {
+          alert('Please fill in all required fields');
+          return;
+        }
+        
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(data.email)) {
+          alert('Please enter a valid email address');
+          return;
+        }
+        
+        // Here you would typically send the data to your server
+        console.log('Form submitted:', data);
+        alert('Thank you for your message! We will get back to you soon.');
+        contactForm.reset();
+      });
+
+      // Prevent horizontal scroll on touch devices
+      document.addEventListener('touchmove', function(e) {
+        if (e.touches.length > 1) {
+          e.preventDefault();
+        }
+      }, { passive: false });
+
+      // Scroll animations
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+
+      // Observe all animated elements
+      document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in').forEach((el) => {
+        observer.observe(el);
+      });
+
+      // Navbar scroll effect
+      const navbar = document.querySelector('nav');
+      let lastScroll = 0;
+
+      window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > 50) {
+          navbar.classList.add('navbar-scroll');
+        } else {
+          navbar.classList.remove('navbar-scroll');
+        }
+        
+        lastScroll = currentScroll;
+      });
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const target = document.querySelector(targetId);
+          
+          if (target) {
+            const headerOffset = 80; // Adjust this value based on your header height
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+
+            // Close mobile menu if open
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (!mobileMenu.classList.contains('hidden')) {
+              mobileMenu.classList.add('hidden');
+            }
+
+            // Add highlight animation to target section
+            requestAnimationFrame(() => {
+              target.classList.add('section-reveal');
+              setTimeout(() => {
+                target.classList.add('visible');
+              }, 50);
+            });
+          }
+        });
+      });
+
+      // Add active state to navigation links
+      const sections = document.querySelectorAll('section[id], div[id]');
+      const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+      window.addEventListener('scroll', () => {
+        let current = '';
+        
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (window.pageYOffset >= sectionTop - 100) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('text-[#8B5CF6]');
+          if (link.getAttribute('href').slice(1) === current) {
+            link.classList.add('text-[#8B5CF6]');
+          }
+        });
+      });
+
+      // Page Load Animation
+      document.addEventListener('DOMContentLoaded', () => {
+        // Remove loading animation faster
+        const loadingAnimation = document.querySelector('.loading-animation');
+        loadingAnimation.classList.add('fade-out');
+        setTimeout(() => {
+          loadingAnimation.remove();
+        }, 300);
+
+        // Add page-load class to main sections with reduced delay
+        document.querySelectorAll('section, .w-full').forEach((section, index) => {
+          section.classList.add('section-reveal');
+          section.style.transitionDelay = `${index * 0.05}s`;
+        });
+      });
+
+      // Optimized Scroll Animations
+      const enhancedObserverOptions = {
+        root: null,
+        rootMargin: '50px 0px',
+        threshold: 0.1
+      };
+
+      const enhancedObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            requestAnimationFrame(() => {
+              entry.target.classList.add('visible');
+              entry.target.querySelectorAll('.bg-white').forEach(card => {
+                card.classList.add('card-hover');
+              });
+            });
+          }
+        });
+      }, enhancedObserverOptions);
+
+      // Observe all sections with performance optimization
+      const animatedSections = document.querySelectorAll('section, .w-full');
+      animatedSections.forEach((section) => {
+        enhancedObserver.observe(section);
+      });
+
+      // Add will-change hints for better performance
+      document.querySelectorAll('.card-hover, .button-hover').forEach(element => {
+        element.style.willChange = 'transform';
+      });
+
+      // Product showcase button functionality
+      const popularItemsBtn = document.getElementById('popular-items');
+      const feature2Btn = document.getElementById('feature-2');
+      const feature3Btn = document.getElementById('feature-3');
+      
+      const popularCard = document.getElementById('popular-card');
+      const feature2Card = document.getElementById('feature-2-card');
+      const feature3Card = document.getElementById('feature-3-card');
+
+      // Function to update button states
+      function updateButtonStates(activeButton) {
+        [popularItemsBtn, feature2Btn, feature3Btn].forEach(btn => {
+          if (btn === activeButton) {
+            btn.classList.remove('border', 'border-gray-300', 'text-gray-700');
+            btn.classList.add('bg-[#8B5CF6]', 'text-white');
+          } else {
+            btn.classList.remove('bg-[#8B5CF6]', 'text-white');
+            btn.classList.add('border', 'border-gray-300', 'text-gray-700');
+          }
+        });
+      }
+
+      // Function to update card visibility
+      function updateCardVisibility(activeCard) {
+        [popularCard, feature2Card, feature3Card].forEach(card => {
+          if (card === activeCard) {
+            card.style.opacity = '1';
+            card.style.transform = 'scale(1)';
+          } else {
+            card.style.opacity = '0.5';
+            card.style.transform = 'scale(0.95)';
+          }
+        });
+      }
+
+      // Add click handlers
+      popularItemsBtn.addEventListener('click', () => {
+        updateButtonStates(popularItemsBtn);
+        updateCardVisibility(popularCard);
+      });
+
+      feature2Btn.addEventListener('click', () => {
+        updateButtonStates(feature2Btn);
+        updateCardVisibility(feature2Card);
+      });
+
+      feature3Btn.addEventListener('click', () => {
+        updateButtonStates(feature3Btn);
+        updateCardVisibility(feature3Card);
+      });
+
+      // Initialize with Popular Items selected
+      updateButtonStates(popularItemsBtn);
+      updateCardVisibility(popularCard);
+
+      // Add hover effects for cards
+      [popularCard, feature2Card, feature3Card].forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.style.transform = 'scale(1.05)';
+          card.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.1)';
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'scale(1)';
+          card.style.boxShadow = 'none';
+        });
+      });
+    </script>
+  </body>
+</html>
