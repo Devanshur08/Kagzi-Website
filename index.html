@@ -627,13 +627,14 @@
         <!-- Image column -->
         <div class="flex justify-center">
           <img 
-            src="./public/Team.png" 
+            src="public/Team.png" 
             alt="Our team collaborating" 
             class="rounded-lg shadow-lg w-full h-auto object-cover"
-            loading="lazy"
+            loading="eager"
             width="800"
             height="600"
             onerror="this.onerror=null; this.src='./public/placeholder.svg';"
+            style="opacity:1;visibility:visible;"
           />
         </div>
         <!-- Text column -->
@@ -937,15 +938,16 @@
         <!-- Right: Abstract Image -->
         <div class="hidden md:block w-full h-full relative">
           <img 
-            src="./public/Log.png" 
+            src="public/login.png" 
             alt="Contact us illustration" 
             class="w-full h-full object-cover"
-            loading="lazy"
+            loading="eager"
             width="900"
             height="600"
             onerror="this.onerror=null; this.src='./public/placeholder.svg';"
+            style="opacity:1;visibility:visible;"
           />
-          <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent pointer-events-none"></div>
         </div>
       </div>
     </section>
@@ -1172,14 +1174,6 @@
       // Update on resize and orientation change
       window.addEventListener('resize', setVH);
       window.addEventListener('orientationchange', setVH);
-      
-      // Fix mobile image loading
-      document.addEventListener('DOMContentLoaded', function() {
-        const heroImage = document.querySelector('#home img');
-        if (heroImage) {
-          heroImage.style.opacity = '1';
-        }
-      });
     </script>
 
     <!-- Add mobile-specific scripts -->
